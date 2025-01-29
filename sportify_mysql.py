@@ -61,14 +61,13 @@ track_data = {
     'Popularity' : track['popularity'],
     'Duration (minutes)' : track['duration_ms'] /60000 ,# in JSON, duration is in milliseconds
     'Artist' : track['album']['artists'][0]['name'],
-    'country' : track['available_markets'],
     'Album' : track['album']['name']
 }
 
 # Inserting the data to db
 insert_query = '''
-INSERT INTO spotify_tracks(track_name, artist, album, popularity, duration_minutes,country)
-VALUES(%s,%s,%s,%s,%s,%s)
+INSERT INTO sportify_tracks(track_name, artist, album, popularity, duration_minutes)
+VALUES(%s,%s,%s,%s,%s)
 '''
 
 print("Track Name:", track_data['Track Name'], type(track_data['Track Name']))
@@ -76,7 +75,6 @@ print("Artist:", track_data['Artist'], type(track_data['Artist']))
 print("Album:", track_data['Album'], type(track_data['Album']))
 print("Popularity:", track_data['Popularity'], type(track_data['Popularity']))
 print("Duration (minutes):", track_data['Duration (minutes)'], type(track_data['Duration (minutes)']))
-print("Country:", track_data['country'], type(track_data['country']))
 
 
 cursor.execute(insert_query, (
@@ -84,8 +82,7 @@ cursor.execute(insert_query, (
     track_data['Artist'],
     track_data['Album'],
     track_data['Popularity'],
-    track_data['Duration (minutes)'],
-    track_data['country']
+    track_data['Duration (minutes)']
 ))
 
 connection.commit() # at this point only, mysql stores the data

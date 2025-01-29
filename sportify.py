@@ -41,7 +41,6 @@ track_data = {
     'Popularity' : track['popularity'],
     'Duration (minutes)' : track['duration_ms'] /60000 ,# in JSON, duration is in milliseconds
     'Artist' : track['album']['artists'][0]['name'],
-    'country' : track['available_markets'],
     'Album' : track['album']['name']
 }
 
